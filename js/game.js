@@ -426,12 +426,75 @@ function renderBoard() {
              * Si la celda contiene un número,
              * mostramos el número.
              */
-            if (value !== 0) {
+            /*
+ * Si la celda contiene una ficha:
+ */
+if (value !== 0) {
 
-                tile.textContent =
-                    value;
+    /*
+     * Mostramos el número.
+     */
+    tile.textContent =
+        value;
 
-            }
+
+    /*
+     * ------------------------------------------------------------
+     * ASIGNAR ESTILO SEGÚN EL VALOR
+     * ------------------------------------------------------------
+     *
+     * Ejemplo:
+     *
+     * 2    → tile-2
+     * 4    → tile-4
+     * 8    → tile-8
+     * 16   → tile-16
+     * ...
+     *
+     * Esto permite que CSS controle completamente
+     * la apariencia de cada ficha.
+     */
+
+    /*
+     * Para valores normales hasta 2048:
+     */
+    if (value <= 2048) {
+
+        tile.classList.add(
+            `tile-${value}`
+        );
+
+    } else {
+
+        /*
+         * --------------------------------------------------------
+         * VALORES SUPERIORES A 2048
+         * --------------------------------------------------------
+         *
+         * Como nuestro juego será infinito, no podemos crear
+         * una clase CSS diferente para cada número:
+         *
+         * tile-4096
+         * tile-8192
+         * tile-16384
+         * tile-32768
+         *
+         * Por eso utilizamos una clase genérica.
+         */
+
+        tile.classList.add(
+            "tile-super"
+        );
+    }
+
+
+    /*
+     * Añadimos una pequeña animación de aparición.
+     */
+    tile.classList.add(
+        "tile-new"
+    );
+}
 
 
             /*
