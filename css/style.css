@@ -487,6 +487,300 @@ body {
         box-shadow 0.12s ease;
 }
 
+/* ================================================================
+   ESTILOS TEMPORALES PARA LAS FICHAS
+   ================================================================ */
+
+/*
+ * Estas clases todavía no están siendo asignadas automáticamente
+ * por game.js.
+ *
+ * Las dejamos preparadas para el siguiente paso.
+ */
+
+
+/* ================================================================
+   FICHA 2
+   ================================================================ */
+
+.tile.tile-2 {
+
+    background:
+        #eee4da;
+
+    color:
+        #776e65;
+}
+
+
+/* ================================================================
+   FICHA 4
+   ================================================================ */
+
+.tile.tile-4 {
+
+    background:
+        #ede0c8;
+
+    color:
+        #776e65;
+}
+
+
+/* ================================================================
+   FICHA 8
+   ================================================================ */
+
+.tile.tile-8 {
+
+    background:
+        #f2b179;
+
+    color:
+        #f9f6f2;
+}
+
+
+/* ================================================================
+   FICHA 16
+   ================================================================ */
+
+.tile.tile-16 {
+
+    background:
+        #f59563;
+
+    color:
+        #f9f6f2;
+}
+
+
+/* ================================================================
+   FICHA 32
+   ================================================================ */
+
+.tile.tile-32 {
+
+    background:
+        #f67c5f;
+
+    color:
+        #f9f6f2;
+}
+
+
+/* ================================================================
+   FICHA 64
+   ================================================================ */
+
+.tile.tile-64 {
+
+    background:
+        #f65e3b;
+
+    color:
+        #f9f6f2;
+}
+
+
+/* ================================================================
+   FICHA 128
+   ================================================================ */
+
+.tile.tile-128 {
+
+    background:
+        #edcf72;
+
+    color:
+        #f9f6f2;
+
+    font-size:
+        clamp(1.4rem, 6vw, 2.6rem);
+}
+
+
+/* ================================================================
+   FICHA 256
+   ================================================================ */
+
+.tile.tile-256 {
+
+    background:
+        #edcc61;
+
+    color:
+        #f9f6f2;
+
+    font-size:
+        clamp(1.4rem, 6vw, 2.6rem);
+}
+
+
+/* ================================================================
+   FICHA 512
+   ================================================================ */
+
+.tile.tile-512 {
+
+    background:
+        #edc850;
+
+    color:
+        #f9f6f2;
+
+    font-size:
+        clamp(1.3rem, 5.5vw, 2.4rem);
+}
+
+
+/* ================================================================
+   FICHA 1024
+   ================================================================ */
+
+.tile.tile-1024 {
+
+    background:
+        #edc53f;
+
+    color:
+        #f9f6f2;
+
+    font-size:
+        clamp(1.1rem, 5vw, 2.1rem);
+}
+
+
+/* ================================================================
+   FICHA 2048
+   ================================================================ */
+
+.tile.tile-2048 {
+
+    background:
+        #edc22e;
+
+    color:
+        #f9f6f2;
+
+    font-size:
+        clamp(1.1rem, 5vw, 2.1rem);
+
+    box-shadow:
+        0 0 25px rgba(237, 194, 46, 0.55);
+}
+
+
+/* ================================================================
+   FICHAS SUPERIORES A 2048
+   ================================================================ */
+
+/*
+ * Y aquí viene algo importante para nuestro proyecto.
+ *
+ * Como nuestro juego será INFINITO, no podemos crear manualmente
+ * una clase para cada número imaginable.
+ *
+ * Posteriormente JavaScript utilizará un estilo especial para
+ * valores superiores a 2048.
+ */
+
+.tile.tile-super {
+
+    background:
+        #3c3a32;
+
+    color:
+        #f9f6f2;
+
+    font-size:
+        clamp(0.9rem, 4vw, 1.8rem);
+
+    box-shadow:
+        0 0 20px rgba(60, 58, 50, 0.45);
+}
+
+
+/* ================================================================
+   EFECTO AL CREAR UNA FICHA
+   ================================================================ */
+
+@keyframes tileAppear {
+
+    0% {
+
+        transform:
+            scale(0);
+
+        opacity:
+            0;
+    }
+
+    70% {
+
+        transform:
+            scale(1.12);
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/*
+ * Esta clase será añadida posteriormente por JavaScript
+ * cuando aparezca una nueva ficha.
+ */
+
+.tile.tile-new {
+
+    animation:
+        tileAppear 0.15s ease-out;
+}
+
+
+/* ================================================================
+   EFECTO AL COMBINAR
+   ================================================================ */
+
+@keyframes tileMerge {
+
+    0% {
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+
+        transform:
+            scale(1.18);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/*
+ * Preparado para las combinaciones.
+ */
+
+.tile.tile-merged {
+
+    animation:
+        tileMerge 0.15s ease-out;
+}
+
 
 /* ================================================================
    INDICACIÓN DE CONTROLES
