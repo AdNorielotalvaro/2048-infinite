@@ -1,3 +1,5 @@
+import { getCurrentPlayer } from "./supabase.js";
+
 /*
  * =================================================================
  * 2048 INFINITE
