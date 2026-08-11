@@ -108,4 +108,7 @@ export async function testSupabaseConnection() {
 
         return false;
     }
+
+
+    window.testSupabaseConnection = testSupabaseConnection;
 }
