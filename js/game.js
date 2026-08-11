@@ -1489,12 +1489,3 @@ gameBoardElement.addEventListener(
  * Solo nos permite confirmar que el navegador
  * está detectando correctamente el final del gesto.
  */
-
-gameBoardElement.addEventListener(
-    "touchend",
-    function () {
-
-        alert("TOUCHEND DETECTADO");
-
-    }
-);
