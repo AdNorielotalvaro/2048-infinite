@@ -24,11 +24,64 @@ export async function loginUser(email, password) {
     });
 
     if (error) {
-        console.error("Error iniciando sesión:", error);
+        console.error(
+            "Error iniciando sesión:",
+            error
+        );
+
         return false;
     }
 
-    console.log("Usuario autenticado correctamente:", data.user);
+    console.log(
+        "Usuario autenticado correctamente:",
+        data.user
+    );
 
     return true;
+}
+
+export async function getCurrentPlayer() {
+
+    const {
+        data: {
+            user
+        },
+        error: userError
+    } = await supabase.auth.getUser();
+
+    if (userError || !user) {
+
+        console.error(
+            "No hay usuario autenticado:",
+            userError
+        );
+
+        return null;
+    }
+
+    const {
+        data,
+        error
+    } = await supabase
+        .from("players")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+    if (error) {
+
+        console.error(
+            "Error obteniendo jugador:",
+            error
+        );
+
+        return null;
+    }
+
+    console.log(
+        "Jugador encontrado:",
+        data
+    );
+
+    return data;
 }
