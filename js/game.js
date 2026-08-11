@@ -1330,3 +1330,249 @@ newGameButton.addEventListener(
  * iniciamos automáticamente una partida.
  */
 startNewGame();
+
+/* =================================================================
+   27. CONTROLES TÁCTILES PARA MÓVILES
+   ================================================================= */
+
+/*
+ * Estas variables almacenan la posición donde comenzó
+ * el gesto del dedo.
+ *
+ * Ejemplo:
+ *
+ * El usuario toca:
+ *
+ *       X
+ *
+ * y posteriormente desliza:
+ *
+ *       X -------->
+ *
+ * Guardaremos ambas posiciones para determinar
+ * la dirección.
+ */
+
+let touchStartX = 0;
+
+let touchStartY = 0;
+
+
+/*
+ * Estas variables almacenarán la posición final
+ * del dedo.
+ */
+
+let touchEndX = 0;
+
+let touchEndY = 0;
+
+
+/* =================================================================
+   28. DETECTAR INICIO DEL DESLIZAMIENTO
+   ================================================================= */
+
+/*
+ * touchstart ocurre cuando el dedo toca la pantalla.
+ */
+gameBoardElement.addEventListener(
+    "touchstart",
+    event => {
+
+        /*
+         * Obtenemos el primer dedo.
+         */
+        const touch =
+            event.changedTouches[0];
+
+
+        /*
+         * Guardamos la posición inicial X.
+         */
+        touchStartX =
+            touch.clientX;
+
+
+        /*
+         * Guardamos la posición inicial Y.
+         */
+        touchStartY =
+            touch.clientY;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =================================================================
+   29. DETECTAR FINAL DEL DESLIZAMIENTO
+   ================================================================= */
+
+/*
+ * touchend ocurre cuando el usuario levanta
+ * el dedo de la pantalla.
+ */
+gameBoardElement.addEventListener(
+    "touchend",
+    event => {
+
+        /*
+         * Obtenemos la posición final.
+         */
+        const touch =
+            event.changedTouches[0];
+
+
+        /*
+         * Guardamos X final.
+         */
+        touchEndX =
+            touch.clientX;
+
+
+        /*
+         * Guardamos Y final.
+         */
+        touchEndY =
+            touch.clientY;
+
+
+        /*
+         * Procesamos el gesto.
+         */
+        handleSwipe();
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/* =================================================================
+   30. PROCESAR EL GESTO
+   ================================================================= */
+
+/*
+ * Determina hacia dónde deslizó el usuario.
+ */
+function handleSwipe() {
+
+    /*
+     * Calculamos cuánto se desplazó horizontalmente.
+     */
+    const deltaX =
+        touchEndX -
+        touchStartX;
+
+
+    /*
+     * Calculamos cuánto se desplazó verticalmente.
+     */
+    const deltaY =
+        touchEndY -
+        touchStartY;
+
+
+    /*
+     * Distancia mínima necesaria para considerar
+     * que realmente hubo un deslizamiento.
+     *
+     * Esto evita que un simple toque accidental
+     * sea interpretado como movimiento.
+     */
+    const minimumSwipeDistance = 30;
+
+
+    /*
+     * Determinamos si el movimiento fue principalmente
+     * horizontal.
+     */
+    const isHorizontal =
+        Math.abs(deltaX) >
+        Math.abs(deltaY);
+
+
+    /*
+     * Si el movimiento fue horizontal:
+     */
+    if (isHorizontal) {
+
+        /*
+         * Verificamos que haya suficiente distancia.
+         */
+        if (
+            Math.abs(deltaX) <
+            minimumSwipeDistance
+        ) {
+
+            return;
+        }
+
+
+        /*
+         * Deslizamiento hacia la derecha.
+         */
+        if (deltaX > 0) {
+
+            moveRight();
+
+        }
+
+
+        /*
+         * Deslizamiento hacia la izquierda.
+         */
+        else {
+
+            moveLeft();
+        }
+
+
+        /*
+         * Terminamos aquí porque ya procesamos
+         * el movimiento horizontal.
+         */
+        return;
+    }
+
+
+    /*
+     * ------------------------------------------------------------
+     * MOVIMIENTO VERTICAL
+     * ------------------------------------------------------------
+     */
+
+
+    /*
+     * Comprobamos la distancia mínima.
+     */
+    if (
+        Math.abs(deltaY) <
+        minimumSwipeDistance
+    ) {
+
+        return;
+    }
+
+
+    /*
+     * Deslizamiento hacia abajo.
+     */
+    if (deltaY > 0) {
+
+        moveDown();
+
+    }
+
+
+    /*
+     * Deslizamiento hacia arriba.
+     */
+    else {
+
+        moveUp();
+    }
+}
