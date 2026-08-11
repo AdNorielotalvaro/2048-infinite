@@ -1331,6 +1331,153 @@ newGameButton.addEventListener(
  */
 startNewGame();
 
-document.addEventListener("touchstart", function () {
-    alert("TOUCHSTART DETECTADO");
-});
+/* ================================================================
+   CONTROLES TÁCTILES
+   ================================================================ */
+
+/*
+ * Posición inicial del dedo.
+ */
+let touchStartX = 0;
+let touchStartY = 0;
+
+
+/*
+ * Distancia mínima para reconocer un deslizamiento.
+ */
+const SWIPE_THRESHOLD = 40;
+
+
+/*
+ * Detectamos cuando el dedo toca el tablero.
+ */
+gameBoardElement.addEventListener(
+    "touchstart",
+    function (event) {
+
+        /*
+         * Obtenemos el primer dedo.
+         */
+        const touch = event.touches[0];
+
+        /*
+         * Guardamos la posición inicial.
+         */
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+/*
+ * Detectamos cuando el dedo abandona la pantalla.
+ */
+gameBoardElement.addEventListener(
+    "touchend",
+    function (event) {
+
+        /*
+         * Obtenemos la posición final.
+         */
+        const touch = event.changedTouches[0];
+
+        /*
+         * Calculamos cuánto se movió horizontalmente.
+         */
+        const deltaX =
+            touch.clientX - touchStartX;
+
+        /*
+         * Calculamos cuánto se movió verticalmente.
+         */
+        const deltaY =
+            touch.clientY - touchStartY;
+
+
+        /*
+         * Valores absolutos.
+         *
+         * Math.abs() convierte:
+         *
+         * -100 → 100
+         *  100 → 100
+         */
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+
+
+        /*
+         * Si el movimiento fue demasiado pequeño,
+         * probablemente fue solamente un toque.
+         */
+        if (
+            absX < SWIPE_THRESHOLD &&
+            absY < SWIPE_THRESHOLD
+        ) {
+
+            return;
+        }
+
+
+        /*
+         * --------------------------------------------------------
+         * MOVIMIENTO HORIZONTAL
+         * --------------------------------------------------------
+         */
+
+        if (absX > absY) {
+
+            /*
+             * Hacia la derecha.
+             */
+            if (deltaX > 0) {
+
+                moveRight();
+
+            }
+
+            /*
+             * Hacia la izquierda.
+             */
+            else {
+
+                moveLeft();
+            }
+
+
+            return;
+        }
+
+
+        /*
+         * --------------------------------------------------------
+         * MOVIMIENTO VERTICAL
+         * --------------------------------------------------------
+         */
+
+        /*
+         * Hacia abajo.
+         */
+        if (deltaY > 0) {
+
+            moveDown();
+
+        }
+
+        /*
+         * Hacia arriba.
+         */
+        else {
+
+            moveUp();
+        }
+
+    },
+    {
+        passive: true
+    }
+);
