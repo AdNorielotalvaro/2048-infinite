@@ -4,18 +4,15 @@
 <head>
 
     <!-- ============================================================
-         CONFIGURACIÓN GENERAL DEL DOCUMENTO
+         CONFIGURACIÓN GENERAL
          ============================================================ -->
 
-    <!-- Permite utilizar correctamente caracteres especiales
-         del idioma español como á, é, í, ó, ú y ñ. -->
     <meta charset="UTF-8">
 
-    <!-- Hace que la interfaz se adapte correctamente a:
-         - Computadores
-         - Tablets
-         - Celulares
-         - Diferentes tamaños de pantalla -->
+    <!--
+        Hace que el juego se adapte correctamente a celulares,
+        tablets y computadores.
+    -->
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -25,27 +22,17 @@
          INFORMACIÓN DEL SITIO
          ============================================================ -->
 
-    <!-- Título que aparecerá en la pestaña del navegador. -->
     <title>2048 Infinite</title>
 
-    <!-- Descripción utilizada por buscadores y algunos sistemas
-         que muestran información previa del sitio. -->
     <meta
         name="description"
         content="2048 Infinite - Juego de 2048 con niveles infinitos, progreso y ranking."
     >
 
     <!-- ============================================================
-         ARCHIVO DE ESTILOS
+         ESTILOS
          ============================================================ -->
 
-    <!--
-        Conectamos nuestro HTML con la hoja de estilos.
-
-        El archivo está ubicado en:
-
-        /css/style.css
-    -->
     <link
         rel="stylesheet"
         href="css/style.css"
@@ -57,23 +44,11 @@
 <body>
 
     <!-- ============================================================
-         CONTENEDOR PRINCIPAL DE LA APLICACIÓN
+         APLICACIÓN PRINCIPAL
          ============================================================ -->
 
-    <!--
-        Este contenedor será la estructura principal de todo el juego.
-
-        Posteriormente aquí tendremos:
-
-        - Menú principal
-        - Perfil del jugador
-        - Ranking
-        - Selector de niveles
-        - Tablero
-        - Estadísticas
-        - Configuración
-    -->
     <div id="app">
+
 
         <!-- ========================================================
              ENCABEZADO
@@ -81,17 +56,21 @@
 
         <header class="game-header">
 
-            <!-- Nombre del juego -->
-            <h1 class="game-title">
-                2048 Infinite
-            </h1>
+            <!-- Título -->
+            <div class="header-title">
 
-            <!--
-                Esta zona será utilizada posteriormente para mostrar
-                información del jugador.
+                <h1 class="game-title">
+                    2048 Infinite
+                </h1>
 
-                Por ahora solamente dejamos un nombre provisional.
-            -->
+                <p class="game-subtitle">
+                    Niveles infinitos
+                </p>
+
+            </div>
+
+
+            <!-- Información del jugador -->
             <div class="player-info">
 
                 <span class="player-label">
@@ -111,47 +90,206 @@
 
 
         <!-- ========================================================
-             CONTENIDO PRINCIPAL
+             INFORMACIÓN DE LA PARTIDA
              ======================================================== -->
 
-        <main class="main-content">
+        <section class="game-info">
+
+            <!-- Nivel -->
+            <div class="info-card">
+
+                <span class="info-label">
+                    Nivel
+                </span>
+
+                <strong
+                    id="current-level"
+                    class="info-value"
+                >
+                    1
+                </strong>
+
+            </div>
+
+
+            <!-- Puntuación -->
+            <div class="info-card">
+
+                <span class="info-label">
+                    Puntuación
+                </span>
+
+                <strong
+                    id="current-score"
+                    class="info-value"
+                >
+                    0
+                </strong>
+
+            </div>
+
+
+            <!-- Mejor puntuación -->
+            <div class="info-card">
+
+                <span class="info-label">
+                    Mejor
+                </span>
+
+                <strong
+                    id="best-score"
+                    class="info-value"
+                >
+                    0
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================
+             TABLERO
+             ======================================================== -->
+
+        <main class="game-container">
 
             <!--
-                Pantalla inicial provisional.
+                Este será nuestro tablero 4x4.
 
-                Más adelante será reemplazada por el menú principal
-                completo del juego.
+                Posteriormente JavaScript generará las fichas
+                dinámicamente dentro de este elemento.
             -->
-            <section
-                id="main-menu"
-                class="screen"
+            <div
+                id="game-board"
+                class="game-board"
+                aria-label="Tablero de juego 2048"
             >
 
-                <h2>
-                    Bienvenido a 2048 Infinite
-                </h2>
+                <!-- =================================================
+                     FILA 1
+                     ================================================= -->
 
-                <p>
-                    Un juego de 2048 con niveles que nunca terminan.
-                </p>
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
 
-                <!--
-                    Botón provisional.
 
-                    Posteriormente tendrá la función de comenzar
-                    el nivel correspondiente del jugador.
-                -->
-                <button
-                    id="start-game-button"
-                    class="primary-button"
-                    type="button"
-                >
-                    Comenzar
-                </button>
+                <!-- =================================================
+                     FILA 2
+                     ================================================= -->
 
-            </section>
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+
+
+                <!-- =================================================
+                     FILA 3
+                     ================================================= -->
+
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+
+
+                <!-- =================================================
+                     FILA 4
+                     ================================================= -->
+
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+                <div class="tile"></div>
+
+            </div>
+
+
+            <!-- ====================================================
+                 CONTROLES
+                 ==================================================== -->
+
+            <p class="controls-hint">
+
+                🖥️ PC:
+                utiliza las
+                <strong>flechas del teclado</strong>
+
+                <br>
+
+                📱 Móvil:
+                desliza el dedo sobre el tablero
+
+            </p>
 
         </main>
+
+
+        <!-- ========================================================
+             BOTONES PRINCIPALES
+             ======================================================== -->
+
+        <section class="game-actions">
+
+            <button
+                id="new-game-button"
+                class="primary-button"
+                type="button"
+            >
+                Nueva partida
+            </button>
+
+            <button
+                id="levels-button"
+                class="secondary-button"
+                type="button"
+            >
+                Niveles
+            </button>
+
+            <button
+                id="ranking-button"
+                class="secondary-button"
+                type="button"
+            >
+                Ranking
+            </button>
+
+        </section>
+
+
+        <!-- ========================================================
+             INFORMACIÓN DEL NIVEL
+             ======================================================== -->
+
+        <section class="level-progress">
+
+            <div class="level-progress-header">
+
+                <span>
+                    Progreso del nivel
+                </span>
+
+                <strong id="level-progress-text">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    id="level-progress-fill"
+                    class="progress-fill"
+                ></div>
+
+            </div>
+
+        </section>
 
 
         <!-- ========================================================
@@ -164,7 +302,12 @@
                 2048 Infinite
             </p>
 
+            <p>
+                Sistema de niveles infinitos
+            </p>
+
         </footer>
+
 
     </div>
 
@@ -173,16 +316,6 @@
          JAVASCRIPT
          ============================================================ -->
 
-    <!--
-        Cargamos el archivo principal de JavaScript.
-
-        "defer" significa que el navegador descargará el archivo
-        mientras procesa la página, pero esperará hasta terminar
-        de construir el HTML antes de ejecutarlo.
-
-        Esto evita problemas cuando JavaScript intenta acceder
-        a elementos que todavía no existen en el documento.
-    -->
     <script
         src="js/game.js"
         defer
