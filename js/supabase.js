@@ -12,3 +12,23 @@ export const supabase =
         SUPABASE_URL,
         SUPABASE_PUBLISHABLE_KEY
     );
+
+export async function loginUser(email, password) {
+
+    const {
+        data,
+        error
+    } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (error) {
+        console.error("Error iniciando sesión:", error);
+        return false;
+    }
+
+    console.log("Usuario autenticado correctamente:", data.user);
+
+    return true;
+}
