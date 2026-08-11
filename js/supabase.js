@@ -13,6 +13,7 @@ export const supabase =
         SUPABASE_PUBLISHABLE_KEY
     );
 
+
 export async function loginUser(email, password) {
 
     const {
@@ -24,6 +25,7 @@ export async function loginUser(email, password) {
     });
 
     if (error) {
+
         console.error(
             "Error iniciando sesión:",
             error
@@ -39,6 +41,7 @@ export async function loginUser(email, password) {
 
     return true;
 }
+
 
 export async function getCurrentPlayer() {
 
@@ -80,6 +83,45 @@ export async function getCurrentPlayer() {
 
     console.log(
         "Jugador encontrado:",
+        data
+    );
+
+    return data;
+}
+
+
+export async function savePlayerProgress(
+    playerId,
+    bestScore,
+    highestLevel
+) {
+
+    const {
+        data,
+        error
+    } = await supabase
+        .from("players")
+        .update({
+            best_score: bestScore,
+            highest_level: highestLevel,
+            updated_at: new Date().toISOString()
+        })
+        .eq("id", playerId)
+        .select()
+        .single();
+
+    if (error) {
+
+        console.error(
+            "Error guardando progreso:",
+            error
+        );
+
+        return null;
+    }
+
+    console.log(
+        "Progreso guardado correctamente:",
         data
     );
 
