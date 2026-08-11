@@ -1,7 +1,22 @@
 import { getCurrentPlayer } from "./supabase.js";
+
+let currentPlayer = null;
+
 getCurrentPlayer().then(player => {
-    console.log("Jugador desde game.js:", player);
+    currentPlayer = player;
+
+    console.log(
+        "Jugador actual:",
+        currentPlayer
+    );
 });
+
+/*
+=================================================================
+2048 INFINITE
+MOTOR PRINCIPAL DEL JUEGO
+=================================================================
+*/
 
 /*
  * =================================================================
