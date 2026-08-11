@@ -2,45 +2,191 @@
 <html lang="es">
 
 <head>
-    <!-- =========================================================
-         CONFIGURACIÓN BÁSICA DEL DOCUMENTO
-         ========================================================= -->
 
-    <!-- Permite utilizar correctamente caracteres como:
-         á, é, í, ó, ú, ñ, etc. -->
+    <!-- ============================================================
+         CONFIGURACIÓN GENERAL DEL DOCUMENTO
+         ============================================================ -->
+
+    <!-- Permite utilizar correctamente caracteres especiales
+         del idioma español como á, é, í, ó, ú y ñ. -->
     <meta charset="UTF-8">
 
-    <!-- Hace que la aplicación se adapte correctamente
-         a pantallas de celulares, tablets y computadores. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Hace que la interfaz se adapte correctamente a:
+         - Computadores
+         - Tablets
+         - Celulares
+         - Diferentes tamaños de pantalla -->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <!-- Título que aparecerá en la pestaña del navegador -->
+    <!-- ============================================================
+         INFORMACIÓN DEL SITIO
+         ============================================================ -->
+
+    <!-- Título que aparecerá en la pestaña del navegador. -->
     <title>2048 Infinite</title>
 
-    <!-- Descripción básica de la aplicación -->
+    <!-- Descripción utilizada por buscadores y algunos sistemas
+         que muestran información previa del sitio. -->
     <meta
         name="description"
-        content="2048 Infinite - Un juego de 2048 con niveles infinitos."
+        content="2048 Infinite - Juego de 2048 con niveles infinitos, progreso y ranking."
     >
+
+    <!-- ============================================================
+         ARCHIVO DE ESTILOS
+         ============================================================ -->
+
+    <!--
+        Conectamos nuestro HTML con la hoja de estilos.
+
+        El archivo está ubicado en:
+
+        /css/style.css
+    -->
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- =========================================================
-         CONTENIDO PRINCIPAL
-         ========================================================= -->
+    <!-- ============================================================
+         CONTENEDOR PRINCIPAL DE LA APLICACIÓN
+         ============================================================ -->
 
-    <main>
+    <!--
+        Este contenedor será la estructura principal de todo el juego.
 
-        <!-- Título provisional.
-             Más adelante construiremos aquí toda la interfaz. -->
-        <h1>2048 Infinite</h1>
+        Posteriormente aquí tendremos:
 
-        <!-- Mensaje provisional para comprobar que
-             nuestra aplicación funciona correctamente. -->
-        <p>El juego está comenzando...</p>
+        - Menú principal
+        - Perfil del jugador
+        - Ranking
+        - Selector de niveles
+        - Tablero
+        - Estadísticas
+        - Configuración
+    -->
+    <div id="app">
 
-    </main>
+        <!-- ========================================================
+             ENCABEZADO
+             ======================================================== -->
+
+        <header class="game-header">
+
+            <!-- Nombre del juego -->
+            <h1 class="game-title">
+                2048 Infinite
+            </h1>
+
+            <!--
+                Esta zona será utilizada posteriormente para mostrar
+                información del jugador.
+
+                Por ahora solamente dejamos un nombre provisional.
+            -->
+            <div class="player-info">
+
+                <span class="player-label">
+                    Jugador
+                </span>
+
+                <span
+                    id="player-name"
+                    class="player-name"
+                >
+                    Invitado
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- ========================================================
+             CONTENIDO PRINCIPAL
+             ======================================================== -->
+
+        <main class="main-content">
+
+            <!--
+                Pantalla inicial provisional.
+
+                Más adelante será reemplazada por el menú principal
+                completo del juego.
+            -->
+            <section
+                id="main-menu"
+                class="screen"
+            >
+
+                <h2>
+                    Bienvenido a 2048 Infinite
+                </h2>
+
+                <p>
+                    Un juego de 2048 con niveles que nunca terminan.
+                </p>
+
+                <!--
+                    Botón provisional.
+
+                    Posteriormente tendrá la función de comenzar
+                    el nivel correspondiente del jugador.
+                -->
+                <button
+                    id="start-game-button"
+                    class="primary-button"
+                    type="button"
+                >
+                    Comenzar
+                </button>
+
+            </section>
+
+        </main>
+
+
+        <!-- ========================================================
+             PIE DE PÁGINA
+             ======================================================== -->
+
+        <footer class="game-footer">
+
+            <p>
+                2048 Infinite
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <!-- ============================================================
+         JAVASCRIPT
+         ============================================================ -->
+
+    <!--
+        Cargamos el archivo principal de JavaScript.
+
+        "defer" significa que el navegador descargará el archivo
+        mientras procesa la página, pero esperará hasta terminar
+        de construir el HTML antes de ejecutarlo.
+
+        Esto evita problemas cuando JavaScript intenta acceder
+        a elementos que todavía no existen en el documento.
+    -->
+    <script
+        src="js/game.js"
+        defer
+    ></script>
 
 </body>
 
