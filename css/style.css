@@ -1,1 +1,661 @@
-/* Hoja de estilos principal de 2048 Infinite */
+/*
+ * ================================================================
+ * 2048 INFINITE
+ * HOJA DE ESTILOS PRINCIPAL
+ * ================================================================
+ *
+ * Este archivo controla la apariencia visual de la aplicación.
+ *
+ * Actualmente estamos construyendo solamente la estructura visual
+ * inicial. Posteriormente añadiremos:
+ *
+ * - Tablero del juego
+ * - Fichas
+ * - Animaciones
+ * - Menús
+ * - Selector de niveles
+ * - Ranking
+ * - Perfil
+ * - Modales
+ * - Modo oscuro
+ * - Diseño avanzado para móviles
+ *
+ * IMPORTANTE:
+ * La lógica del juego estará en:
+ *
+ *     /js/game.js
+ *
+ * De esta manera mantenemos separada la presentación de la lógica.
+ * ================================================================
+ */
+
+
+/* ================================================================
+   1. VARIABLES GLOBALES
+   ================================================================ */
+
+/*
+ * :root permite definir variables CSS que podremos reutilizar
+ * en todo el proyecto.
+ *
+ * Esto será especialmente útil cuando posteriormente creemos
+ * diferentes temas visuales.
+ */
+:root {
+
+    /* Fondo principal de la aplicación */
+    --color-background: #faf8ef;
+
+    /* Fondo de tarjetas y paneles */
+    --color-surface: #ffffff;
+
+    /* Color principal del texto */
+    --color-text: #776e65;
+
+    /* Texto secundario */
+    --color-text-secondary: #8f877f;
+
+    /* Color principal de botones */
+    --color-primary: #8f7a66;
+
+    /* Color de texto claro */
+    --color-light: #f9f6f2;
+
+    /* Bordes suaves */
+    --color-border: #e6e1d8;
+
+    /* Sombra general */
+    --shadow-soft:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+    /* Radio de las esquinas */
+    --radius-large: 20px;
+
+    /* Radio de botones */
+    --radius-button: 12px;
+
+    /* Ancho máximo de la aplicación */
+    --max-width: 900px;
+}
+
+
+/* ================================================================
+   2. RESETEO BÁSICO
+   ================================================================ */
+
+/*
+ * Eliminamos márgenes y rellenos predeterminados del navegador.
+ *
+ * Esto nos permite controlar completamente el diseño.
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* ================================================================
+   3. CONFIGURACIÓN GENERAL DEL DOCUMENTO
+   ================================================================ */
+
+html {
+    /*
+     * Permite desplazamiento suave cuando posteriormente
+     * tengamos diferentes secciones.
+     */
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    /*
+     * Fuente del sistema.
+     *
+     * Utilizar fuentes del sistema hace que el juego cargue
+     * rápidamente sin depender de fuentes externas.
+     */
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    /* Fondo general */
+    background: var(--color-background);
+
+    /* Color general del texto */
+    color: var(--color-text);
+
+    /*
+     * Altura mínima para ocupar toda la pantalla.
+     */
+    min-height: 100vh;
+
+    /*
+     * Evitamos desplazamiento horizontal accidental.
+     */
+    overflow-x: hidden;
+
+    /*
+     * Mejora el comportamiento táctil en móviles.
+     */
+    touch-action: manipulation;
+}
+
+
+/* ================================================================
+   4. CONTENEDOR PRINCIPAL
+   ================================================================ */
+
+#app {
+
+    /*
+     * Ancho máximo para pantallas grandes.
+     */
+    width: 100%;
+
+    max-width: var(--max-width);
+
+    /*
+     * Centra horizontalmente la aplicación.
+     */
+    margin: 0 auto;
+
+    /*
+     * Espacio interior.
+     */
+    padding: 30px 20px 40px;
+
+    /*
+     * Permite que la aplicación ocupe al menos toda
+     * la altura de la pantalla.
+     */
+    min-height: 100vh;
+
+    /*
+     * Flexbox nos permitirá organizar las secciones.
+     */
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* ================================================================
+   5. ENCABEZADO
+   ================================================================ */
+
+.game-header {
+
+    /*
+     * Flexbox para colocar el título y la información
+     * del jugador.
+     */
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    /*
+     * Separación entre elementos.
+     */
+    gap: 20px;
+
+    /*
+     * Espacio inferior.
+     */
+    margin-bottom: 40px;
+}
+
+
+/* ================================================================
+   6. TÍTULO DEL JUEGO
+   ================================================================ */
+
+.game-title {
+
+    /*
+     * Tamaño grande del título.
+     */
+    font-size: clamp(2.2rem, 6vw, 4rem);
+
+    /*
+     * Grosor del texto.
+     */
+    font-weight: 900;
+
+    /*
+     * Espaciado ligeramente negativo.
+     */
+    letter-spacing: -2px;
+
+    /*
+     * Evita que el título se parta innecesariamente.
+     */
+    white-space: nowrap;
+}
+
+
+/* ================================================================
+   7. INFORMACIÓN DEL JUGADOR
+   ================================================================ */
+
+.player-info {
+
+    /*
+     * Fondo blanco.
+     */
+    background: var(--color-surface);
+
+    /*
+     * Espaciado interior.
+     */
+    padding: 12px 18px;
+
+    /*
+     * Esquinas redondeadas.
+     */
+    border-radius: var(--radius-button);
+
+    /*
+     * Sombra ligera.
+     */
+    box-shadow: var(--shadow-soft);
+
+    /*
+     * Organización vertical.
+     */
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    /*
+     * Evita que sea demasiado pequeño.
+     */
+    min-width: 120px;
+}
+
+
+.player-label {
+
+    /*
+     * Texto pequeño.
+     */
+    font-size: 0.75rem;
+
+    /*
+     * Mayúsculas.
+     */
+    text-transform: uppercase;
+
+    /*
+     * Espaciado entre letras.
+     */
+    letter-spacing: 1px;
+
+    /*
+     * Color secundario.
+     */
+    color: var(--color-text-secondary);
+}
+
+
+.player-name {
+
+    /*
+     * Nombre del jugador.
+     */
+    font-size: 1rem;
+
+    /*
+     * Texto destacado.
+     */
+    font-weight: 700;
+}
+
+
+/* ================================================================
+   8. CONTENIDO PRINCIPAL
+   ================================================================ */
+
+.main-content {
+
+    /*
+     * Hace que el contenido ocupe el espacio disponible.
+     */
+    flex: 1;
+
+    /*
+     * Centra horizontalmente las pantallas.
+     */
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+
+/* ================================================================
+   9. PANTALLAS
+   ================================================================ */
+
+.screen {
+
+    /*
+     * Fondo blanco.
+     */
+    background: var(--color-surface);
+
+    /*
+     * Ancho completo.
+     */
+    width: 100%;
+
+    /*
+     * Espaciado interior.
+     */
+    padding: 50px 30px;
+
+    /*
+     * Esquinas redondeadas.
+     */
+    border-radius: var(--radius-large);
+
+    /*
+     * Sombra.
+     */
+    box-shadow: var(--shadow-soft);
+
+    /*
+     * Alineación del texto.
+     */
+    text-align: center;
+}
+
+
+/* ================================================================
+   10. TÍTULO DE LA PANTALLA
+   ================================================================ */
+
+.screen h2 {
+
+    /*
+     * Tamaño adaptable.
+     */
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+
+    /*
+     * Separación inferior.
+     */
+    margin-bottom: 15px;
+
+    /*
+     * Grosor.
+     */
+    font-weight: 800;
+}
+
+
+/* ================================================================
+   11. TEXTO DE LA PANTALLA
+   ================================================================ */
+
+.screen p {
+
+    /*
+     * Tamaño del texto.
+     */
+    font-size: 1rem;
+
+    /*
+     * Altura de línea.
+     */
+    line-height: 1.6;
+
+    /*
+     * Color secundario.
+     */
+    color: var(--color-text-secondary);
+
+    /*
+     * Separación respecto al botón.
+     */
+    margin-bottom: 30px;
+}
+
+
+/* ================================================================
+   12. BOTÓN PRINCIPAL
+   ================================================================ */
+
+.primary-button {
+
+    /*
+     * Eliminamos el estilo predeterminado.
+     */
+    border: none;
+
+    /*
+     * Fondo.
+     */
+    background: var(--color-primary);
+
+    /*
+     * Texto.
+     */
+    color: var(--color-light);
+
+    /*
+     * Tamaño del texto.
+     */
+    font-size: 1rem;
+
+    /*
+     * Grosor.
+     */
+    font-weight: 700;
+
+    /*
+     * Espaciado.
+     */
+    padding: 15px 30px;
+
+    /*
+     * Esquinas.
+     */
+    border-radius: var(--radius-button);
+
+    /*
+     * Cursor de botón en PC.
+     */
+    cursor: pointer;
+
+    /*
+     * Animación suave.
+     */
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+/* ================================================================
+   13. EFECTO HOVER DEL BOTÓN
+   ================================================================ */
+
+.primary-button:hover {
+
+    /*
+     * Levanta ligeramente el botón.
+     */
+    transform: translateY(-2px);
+
+    /*
+     * Sombra.
+     */
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ================================================================
+   14. EFECTO AL PRESIONAR
+   ================================================================ */
+
+.primary-button:active {
+
+    /*
+     * Devuelve el botón a su posición.
+     */
+    transform: translateY(0);
+
+    /*
+     * Reduce ligeramente la opacidad.
+     */
+    opacity: 0.9;
+}
+
+
+/* ================================================================
+   15. PIE DE PÁGINA
+   ================================================================ */
+
+.game-footer {
+
+    /*
+     * Separación superior.
+     */
+    margin-top: 40px;
+
+    /*
+     * Alineación.
+     */
+    text-align: center;
+
+    /*
+     * Texto pequeño.
+     */
+    font-size: 0.8rem;
+
+    /*
+     * Color secundario.
+     */
+    color: var(--color-text-secondary);
+}
+
+
+/* ================================================================
+   16. RESPONSIVE — TABLETS
+   ================================================================ */
+
+@media (max-width: 700px) {
+
+    /*
+     * Reducimos el espacio general.
+     */
+    #app {
+        padding:
+            20px
+            15px
+            30px;
+    }
+
+
+    /*
+     * El encabezado puede reorganizarse verticalmente.
+     */
+    .game-header {
+
+        flex-direction: column;
+
+        align-items: center;
+
+        margin-bottom: 25px;
+    }
+
+
+    /*
+     * El nombre del jugador queda centrado.
+     */
+    .player-info {
+        align-items: center;
+    }
+
+
+    /*
+     * Reducimos el espacio de la pantalla.
+     */
+    .screen {
+        padding:
+            40px
+            20px;
+    }
+}
+
+
+/* ================================================================
+   17. RESPONSIVE — CELULARES
+   ================================================================ */
+
+@media (max-width: 450px) {
+
+    /*
+     * Reducimos todavía más los espacios.
+     */
+    #app {
+        padding:
+            15px
+            10px
+            25px;
+    }
+
+
+    /*
+     * Título más compacto.
+     */
+    .game-title {
+
+        font-size: 2.4rem;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    /*
+     * Pantalla principal más compacta.
+     */
+    .screen {
+
+        padding:
+            35px
+            15px;
+
+        border-radius: 16px;
+    }
+
+
+    /*
+     * Botón más cómodo para tocar con el dedo.
+     */
+    .primary-button {
+
+        width: 100%;
+
+        min-height: 52px;
+    }
+}
+
+
+/* ================================================================
+   FIN DEL ARCHIVO
+   ================================================================ */
