@@ -1,4 +1,7 @@
 import { getCurrentPlayer } from "./supabase.js";
+getCurrentPlayer().then(player => {
+    console.log("Jugador desde game.js:", player);
+});
 
 /*
  * =================================================================
