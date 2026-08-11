@@ -388,30 +388,103 @@ body {
    CELDAS DEL TABLERO
    ================================================================ */
 
+/* ================================================================
+   FICHAS DEL JUEGO
+   ================================================================ */
+
+/*
+ * Todas las fichas utilizan esta configuración base.
+ *
+ * IMPORTANTE:
+ * Actualmente game.js solamente coloca el número dentro de la
+ * ficha. En un paso posterior añadiremos clases como:
+ *
+ *     tile-2
+ *     tile-4
+ *     tile-8
+ *     tile-16
+ *     ...
+ *
+ * para que cada valor pueda tener su diseño individual.
+ */
+
 .tile {
 
+    /* ============================================================
+       POSICIONAMIENTO
+       ============================================================ */
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    /* ============================================================
+       APARIENCIA BASE
+       ============================================================ */
+
     background:
-        var(--empty-tile);
+        rgba(238, 228, 218, 0.35);
+
+    color:
+        #776e65;
+
+
+    /* ============================================================
+       FORMA
+       ============================================================ */
 
     border-radius:
         10px;
 
-    display: flex;
 
-    justify-content:
-        center;
-
-    align-items:
-        center;
+    /* ============================================================
+       TIPOGRAFÍA
+       ============================================================ */
 
     font-size:
-        clamp(1.5rem, 7vw, 3rem);
+        clamp(1.7rem, 7vw, 3.2rem);
 
     font-weight:
-        800;
+        900;
+
+    line-height:
+        1;
+
+
+    /* ============================================================
+       COMPORTAMIENTO
+       ============================================================ */
 
     user-select:
         none;
+
+    -webkit-user-select:
+        none;
+
+    /*
+     * Evita que el navegador intente seleccionar
+     * el número mientras jugamos.
+     */
+    -webkit-touch-callout:
+        none;
+
+
+    /* ============================================================
+       TRANSICIONES
+       ============================================================ */
+
+    transition:
+
+        transform 0.12s ease,
+
+        background-color 0.12s ease,
+
+        color 0.12s ease,
+
+        box-shadow 0.12s ease;
 }
 
 
